@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../assets/rest.css">
+    <style>
+        .box {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: rgb(247, 200, 140);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+</body>
+
+</html>
+<script>
+    let box = document.querySelector(".box");
+    let timer = null;
+
+    box.onclick = function () {
+        startMove(this, 600);
+    }
+
+    function startMove(dom, target) {
+        clearInterval(timer);
+        var iSpeed = target - dom.offsetLeft > 0 ? 15 : -15;
+        timer = setInterval(function () {
+            if (Math.abs(target - dom.offsetLeft) < Math.abs(iSpeed)) {
+                clearInterval(timer);
+                dom.style.left = target + 'px';
+            } else {
+                dom.style.left = dom.offsetLeft + iSpeed + 'px';
+            }
+        }, 30);
+    }
+</script>
