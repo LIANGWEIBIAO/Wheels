@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>图片拖拽</title>
+</head>
+
+<body>
+    <div class="empty">
+        <!--  拖动的对象，需要设置draggable属性为true(draggable="true"), -->
+        <div class="fill" draggable="true"></div>
+    </div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+</body>
+
+</html>
+<script>
+    const fill = document.querySelector(".fill")
+    const empties = document.querySelectorAll(".empty")
+
+    // 拖动事件：
+    fill.addEventListener("dragstart", dragStart); //在元素开始被拖动时触发
+    fill.addEventListener("dragend", dragEnd);//在拖动操作完成时触发
+
+    //释放区事件：
+    for (const empty of empties) {
+        empty.addEventListener("dragover", dragOver); //当被拖动元素在释放区内移动时触发
+        empty.addEventListener("dragenter", dragEnter); //被拖动元素进入到释放区所占据得屏幕空间时触发
+        empty.addEventListener("dragleave", dragLeave); //当被拖动元素没有放下就离开释放区时触发
+        empty.addEventListener("drop", dragDrop); //当被拖动元素在释放区里放下时触发
+    }
+
+    function dragStart() {
+        this.className += " hold";
+        setTimeout(() => {
+            this.className = "invisible"
+        }, 0)
+
+    }
+    function dragEnd() {
+        this.className = "fill";
+    }
+
+    function dragOver(e) {
+        e.preventDefault();
+        console.log("dragOver");
+
+    }
+    function dragEnter(e) {
+        //console.log("dragEnter");
+        e.preventDefault();
+        this.className += " hovered";
+
+
+    }
+    function dragLeave() {
+        //console.log("dragLeave");
+        this.className += "empty";
+
+    }
+    function dragDrop() {
+        //console.log("dragDrop");
+        this.className = "empty";
+        this.append(fill);
+    }
+</script>
