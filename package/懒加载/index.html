@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .img-wrapper {
+            margin: 0 auto;
+            width: 500px;
+        }
+
+        img {
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="img-wrapper">
+        <img class="scroll-con-img" src="https://source.unsplash.com/random/500x500" alt="">
+        <img class="scroll-con-img" src="https://source.unsplash.com/random/500x500" alt="">
+        <img class="scroll-con-img" data-src="https://source.unsplash.com/random/500x500" alt="">
+        <img class="scroll-con-img" data-src="https://source.unsplash.com/random/500x500" alt="">
+        <img class="scroll-con-img" data-src="https://source.unsplash.com/random/500x500" alt="">
+        <img class="scroll-con-img" data-src="https://source.unsplash.com/random/500x500" alt="">
+        <img class="scroll-con-img" data-src="https://source.unsplash.com/random/500x500" alt="">
+        <img class="scroll-con-img" data-src="https://source.unsplash.com/random/500x500" alt="">
+        <img class="scroll-con-img" data-src="https://source.unsplash.com/random/500x500" alt="">
+    </div>
+</body>
+
+</html>
+<script>
+    //1.
+    //2.鉴定浏览器滚动
+    const imgs = document.querySelectorAll(".scroll-con-img")
+
+    window.addEventListener("scroll", () => {
+
+    })
+    // checkImgs()
+    function checkImgs() {
+        imgs.forEach((item, index) => {
+            const ImgTop = item.getBoundingClientRect().top;
+            const clientHeight = window.innerHeight;
+            console.log(ImgTop);
+            console.log(clientHeight);
+            
+            if (ImgTop <= clientHeight + 100) {
+                const src = item.getAttribute("data-src");
+                item.setAttribute("src", src)
+            }
+        })
+    }
+</script>
